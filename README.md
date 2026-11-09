@@ -1,4 +1,24 @@
-﻿PASTE THE SECTION ABOVE HERE
+﻿# Payment reconciliation: fixed
+
+A broken payment reconciliation script, debugged and fixed in JavaScript (`reconcile.js`) as part of the Koya AI Automation Developer application.
+
+## What was wrong and how I fixed it
+
+| Problem in the data | Effect on the original script | Fix |
+|---|---|---|
+| Truncated/corrupt JSON lines | `JSON.parse` crashed the whole run | Wrapped parsing in `try/catch` and skip unreadable lines |
+| Events with no `txn_id` | Counted as real payments | Ignore events without a `txn_id` |
+| Retried payments (same `txn_id`, multiple attempts), out of time order | Every successful attempt was counted | Keep only the **latest attempt per `txn_id`**, compared by timestamp, not file position |
+| Some amounts are strings with thousands separators (`"6,751.43"`) | `Number()` returned `NaN` and corrupted the total | Strip commas before converting |
+
+**Result:** the script now matches the finance team's hand count (22,733 successful payments out of ~39,700 raw events / 30,000 unique transactions).
+
+Run it with `node reconcile.js` (Node 18+).
+
+---
+
+## Original task
+PASTE THE SECTION ABOVE HERE
 # Payment reconciliation
 
 `payments.jsonl` is an export of payment events from a payments provider, one JSON object per line. The reconciliation script is meant to work out how much money was actually collected, but it doesn't work.
@@ -18,4 +38,5 @@ Fix it, in Python (`reconcile.py`) or JavaScript (`reconcile.js`), whichever you
 1. Fork this repo, fix the script, and commit your fix to your fork.
 2. Run it. Paste the code it prints into the form.
 3. Paste the link to your fork into the form.
+
 

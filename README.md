@@ -1,3 +1,4 @@
+﻿PASTE THE SECTION ABOVE HERE
 # Payment reconciliation
 
 `payments.jsonl` is an export of payment events from a payments provider, one JSON object per line. The reconciliation script is meant to work out how much money was actually collected, but it doesn't work.
@@ -17,3 +18,4 @@ Fix it, in Python (`reconcile.py`) or JavaScript (`reconcile.js`), whichever you
 1. Fork this repo, fix the script, and commit your fix to your fork.
 2. Run it. Paste the code it prints into the form.
 3. Paste the link to your fork into the form.
+

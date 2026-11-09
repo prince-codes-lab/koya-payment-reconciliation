@@ -18,8 +18,7 @@ Run it with `node reconcile.js` (Node 18+).
 ---
 
 ## Original task
-PASTE THE SECTION ABOVE HERE
-# Payment reconciliation
+### Payment reconciliation
 
 `payments.jsonl` is an export of payment events from a payments provider, one JSON object per line. The reconciliation script is meant to work out how much money was actually collected, but it doesn't work.
 
